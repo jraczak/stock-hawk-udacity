@@ -10,8 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.udacity.stockhawk.ui.StockDetailActivity">
 
-    <ListView
+    <TextView
+        android:id="@+id/label_stock_symbol"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content" />
+    <!--<ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView> -->
 
 </FrameLayout>
