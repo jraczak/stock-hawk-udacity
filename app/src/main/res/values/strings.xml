@@ -34,6 +34,6 @@
     <string name="title_activity_stock_detail">StockDetailActivity</string>
 
     <string name="label_date">Date</string>
-    <string name="label_price">Closing Price</string>
+    <string name="label_price">Close</string>
 
 </resources>
