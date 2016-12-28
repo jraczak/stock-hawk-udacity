@@ -3,15 +3,18 @@ package com.udacity.stockhawk.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.udacity.stockhawk.R;
+import com.udacity.stockhawk.adapters.StockHistoryAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StockDetailActivity extends AppCompatActivity {
 
@@ -42,6 +45,7 @@ public class StockDetailActivity extends AppCompatActivity {
         for (String entry : quoteList) {
             String[] pair = entry.split(", ");
             Log.d(LOG_TAG, "Key is " + pair[0] + ", value is " + pair[1]);
+            //TODO: Convert types here instead of converting them everywhere these values are used
             mappedHistory.put(pair[0], pair[1]);
         }
 
@@ -56,12 +60,18 @@ public class StockDetailActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "Converted history: " + mappedHistory);
 
+        TreeMap treeMappedHistory = new TreeMap<>(mappedHistory);
+
+        StockHistoryAdapter historyAdapter = new StockHistoryAdapter(treeMappedHistory);
+        ListView listView = (ListView) findViewById(R.id.stock_history_listview);
+        listView.setAdapter(historyAdapter);
+
 
     }
 
     public static String getFriendlyDate(long milliseconds) {
 
-        java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("MM/dd/yyyy");
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliseconds);
         return simpleDateFormat.format(calendar.getTime());

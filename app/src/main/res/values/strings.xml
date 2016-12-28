@@ -33,4 +33,7 @@
     <string name="toast_no_connectivity">Will refresh when network available.</string>
     <string name="title_activity_stock_detail">StockDetailActivity</string>
 
+    <string name="label_date">Date</string>
+    <string name="label_price">Closing Price</string>
+
 </resources>
