@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.udacity.stockhawk.R;
 
@@ -54,9 +55,19 @@ public class StockHistoryAdapter extends BaseAdapter {
 
         TextView dateTextView = (TextView) view.findViewById(R.id.stock_history_date_textview);
         TextView priceTextView = (TextView) view.findViewById(R.id.stock_history_price_textview);
-        Map.Entry<String, String> entry = getItem(position);
+        final Map.Entry<String, String> entry = getItem(position);
         dateTextView.setText(getFriendlyDate(Long.parseLong(entry.getKey())));
         priceTextView.setText(String.format(Locale.US, "$%.2f", Double.valueOf(entry.getValue())));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Closing price was " +
+                        String.format(Locale.US, "$%.2f", Double.valueOf(entry.getValue())) +
+                        " on " +
+                        getFriendlyDate(Long.parseLong(entry.getKey())), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
 

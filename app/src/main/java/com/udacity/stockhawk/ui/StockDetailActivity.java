@@ -7,12 +7,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.adapters.StockHistoryAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -54,6 +56,7 @@ public class StockDetailActivity extends AppCompatActivity {
             String[] pair = entry.split(", ");
             Log.d(LOG_TAG, "Key is " + pair[0] + ", value is " + pair[1]);
             //TODO: Convert types here instead of converting them everywhere these values are used
+            // Format the price to resemble proper currency when inserting it as value in the map
             mappedHistory.put(pair[0], pair[1]);
         }
 
@@ -76,12 +79,27 @@ public class StockDetailActivity extends AppCompatActivity {
 
         List<Entry> graphEntries = new ArrayList<>();
 
+        DecimalFormat currencyFormat = new DecimalFormat("###,##0.00");
+        String formattedCurrency;
         for (Map.Entry<String, String> historyEntry : treeMappedHistory.entrySet()) {
             graphEntries.add(new Entry(Float.parseFloat(historyEntry.getKey()), Float.parseFloat(historyEntry.getValue())));
         }
 
         LineDataSet lineDataSet = new LineDataSet(graphEntries, null);
+        lineDataSet.setColor(getResources().getColor(R.color.colorAccent));
+        lineDataSet.setCircleColor(getResources().getColor(R.color.colorAccent));
+        lineDataSet.setLineWidth(2);
+
+
         LineData lineData = new LineData(lineDataSet);
+
+        XAxis xAxis = mLineChart.getXAxis();
+        xAxis.setDrawLabels(false);
+        xAxis.setDrawGridLines(false);
+
+        mLineChart.setDrawGridBackground(false);
+        mLineChart.setDrawBorders(false);
+        mLineChart.setTouchEnabled(true);
         mLineChart.setData(lineData);
         mLineChart.invalidate();
 
