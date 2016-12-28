@@ -6,6 +6,10 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.adapters.StockHistoryAdapter;
 
@@ -13,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,6 +27,7 @@ public class StockDetailActivity extends AppCompatActivity {
 
     private String mProvidedSymbol;
     private String mStockHistory;
+    private LineChart mLineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,8 @@ public class StockDetailActivity extends AppCompatActivity {
 
         mProvidedSymbol = getIntent().getStringExtra("symbol");
         mStockHistory = getIntent().getStringExtra("history");
+
+        mLineChart = (LineChart) findViewById(R.id.graph_stock_detail_history);
 
         TextView symbolTextView = (TextView) findViewById(R.id.label_stock_symbol);
         symbolTextView.setText(mProvidedSymbol);
@@ -60,11 +68,22 @@ public class StockDetailActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "Converted history: " + mappedHistory);
 
-        TreeMap treeMappedHistory = new TreeMap<>(mappedHistory);
+        TreeMap<String, String> treeMappedHistory = new TreeMap<>(mappedHistory);
 
         StockHistoryAdapter historyAdapter = new StockHistoryAdapter(treeMappedHistory);
         ListView listView = (ListView) findViewById(R.id.stock_history_listview);
         listView.setAdapter(historyAdapter);
+
+        List<Entry> graphEntries = new ArrayList<>();
+
+        for (Map.Entry<String, String> historyEntry : treeMappedHistory.entrySet()) {
+            graphEntries.add(new Entry(Float.parseFloat(historyEntry.getKey()), Float.parseFloat(historyEntry.getValue())));
+        }
+
+        LineDataSet lineDataSet = new LineDataSet(graphEntries, null);
+        LineData lineData = new LineData(lineDataSet);
+        mLineChart.setData(lineData);
+        mLineChart.invalidate();
 
 
     }

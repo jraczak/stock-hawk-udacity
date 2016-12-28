@@ -17,6 +17,11 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"/>
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/graph_stock_detail_history"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"></com.github.mikephil.charting.charts.LineChart>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
