@@ -43,12 +43,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private StockAdapter adapter;
 
     @Override
-    public void onClick(String symbol, String history) {
+    public void onClick(String symbol, String history, String price, String change) {
         Timber.d("Symbol clicked: %s", symbol);
 
         Intent intent = new Intent(this, StockDetailActivity.class);
         intent.putExtra("symbol", symbol);
         intent.putExtra("history", history);
+        //TODO: Add these values to the header of the view
+        intent.putExtra("price", price);
+        intent.putExtra("change", change);
         startActivity(intent);
     }
 
