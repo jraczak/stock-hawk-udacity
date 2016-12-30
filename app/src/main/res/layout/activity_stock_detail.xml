@@ -20,7 +20,8 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/graph_stock_detail_history"
         android:layout_width="match_parent"
-        android:layout_height="350dp"></com.github.mikephil.charting.charts.LineChart>
+        android:layout_height="350dp"
+        android:contentDescription="@string/content_description_stock_chart"></com.github.mikephil.charting.charts.LineChart>
 
     <LinearLayout
         android:layout_width="match_parent"

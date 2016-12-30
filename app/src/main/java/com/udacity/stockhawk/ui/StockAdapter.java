@@ -125,6 +125,7 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+            itemView.setContentDescription(context.getString(R.string.content_description_stock_item));
         }
 
         @Override

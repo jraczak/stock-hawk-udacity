@@ -31,9 +31,19 @@
 
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
-    <string name="title_activity_stock_detail">StockDetailActivity</string>
+    <string name="title_activity_stock_detail">Stock Details</string>
 
     <string name="label_date">Date</string>
     <string name="label_price">Close</string>
+
+    <!-- CONTENT DESCRIPTION STRINGS -->
+    <string name="content_description_add_stock">Click to add a new stock</string>
+
+    <string name="content_description_display_mode_dollars">Click to change price display to percentage change</string>
+    <string name="content_description_display_mode_percentage">Click to change price display to absolute dollar change</string>
+
+    <string name="content_description_stock_item">Click for a detailed history of this stock</string>
+
+    <string name="content_description_stock_chart">Chart of the historic price of this stock</string>
 
 </resources>
