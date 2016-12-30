@@ -90,6 +90,7 @@ public final class QuoteSyncJob {
                 Log.d(LOG_TAG, "Quote for stock with symbol " + symbol + " is " + quote);
 
                 if (stock.getName() != null) {
+                    Log.d(LOG_TAG, "Stock name was not null");
                     float price = quote.getPrice().floatValue();
                     float change = quote.getChange().floatValue();
                     float percentChange = quote.getChangeInPercent().floatValue();
@@ -119,6 +120,8 @@ public final class QuoteSyncJob {
                     quoteCVs.add(quoteCV);
                 } else {
                     // Need to make sure the toast isn't applied to a dead thread
+                    //TODO: Figure out why this still gets called even for stocks that are successfully returned
+                    //NOTE: This only seems to happen after the else branch has been triggered once
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
