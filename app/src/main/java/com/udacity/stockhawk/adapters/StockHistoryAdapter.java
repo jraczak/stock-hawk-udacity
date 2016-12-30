@@ -68,6 +68,10 @@ public class StockHistoryAdapter extends BaseAdapter {
                         getFriendlyDate(Long.parseLong(entry.getKey())), Toast.LENGTH_SHORT).show();
             }
         });
+        view.setContentDescription("Closing price on " +
+                getFriendlyDate(Long.parseLong(entry.getKey())) +
+                " was " +
+                String.format(Locale.US, "$%.2f", Double.valueOf(entry.getValue())));
 
         return view;
 

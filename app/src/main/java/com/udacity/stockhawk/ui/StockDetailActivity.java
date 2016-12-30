@@ -1,5 +1,6 @@
 package com.udacity.stockhawk.ui;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class StockDetailActivity extends AppCompatActivity {
     private String mProvidedSymbol;
     private String mStockHistory;
     private LineChart mLineChart;
+    private Cursor mCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class StockDetailActivity extends AppCompatActivity {
 
         mProvidedSymbol = getIntent().getStringExtra("symbol");
         mStockHistory = getIntent().getStringExtra("history");
+
+
 
         mLineChart = (LineChart) findViewById(R.id.graph_stock_detail_history);
 
