@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.udacity.stockhawk.R;
+import com.udacity.stockhawk.adapters.StockWidgetService;
 import com.udacity.stockhawk.ui.MainActivity;
 
 /**
@@ -22,8 +23,9 @@ public class StockWidgetProvider extends AppWidgetProvider {
             int layoutId = R.layout.widget_my_stocks;
             RemoteViews views = new RemoteViews(context.getPackageName(), layoutId);
 
+            Intent serviceIntent = new Intent(context, StockWidgetService.class);
 
-            views.setRemoteAdapter(appWidgetId, R.id.widget_listview, null);
+            views.setRemoteAdapter(appWidgetId, R.id.widget_listview, serviceIntent);
 
             Intent launchIntent = new Intent(context, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
