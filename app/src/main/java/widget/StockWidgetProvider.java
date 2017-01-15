@@ -23,7 +23,7 @@ public class StockWidgetProvider extends AppWidgetProvider {
             RemoteViews views = new RemoteViews(context.getPackageName(), layoutId);
 
 
-            views.setTextViewText(R.id.widget_textview, "Hello");
+            views.setRemoteAdapter(appWidgetId, R.id.widget_listview, null);
 
             Intent launchIntent = new Intent(context, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);

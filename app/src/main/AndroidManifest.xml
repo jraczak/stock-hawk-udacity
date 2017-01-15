@@ -27,6 +27,10 @@
             android:name=".sync.QuoteIntentService"
             android:exported="false" />
 
+        <!-- Widget service -->
+        <service android:name=".adapters.StockWidgetService"
+            android:permission="android.permission.BIND_REMOTE_VIEWS"/>
+
         <provider
             android:name=".data.StockProvider"
             android:authorities="com.udacity.stockhawk"
