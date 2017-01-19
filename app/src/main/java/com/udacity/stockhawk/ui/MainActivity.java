@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         } else {
             item.setIcon(R.drawable.ic_dollar);
-            findViewById(R.id.action_change_units).setContentDescription(getString(R.string.content_description_display_mode_dollars));
+            //findViewById(R.id.action_change_units).setContentDescription(getString(R.string.content_description_display_mode_dollars));
         }
     }
 
