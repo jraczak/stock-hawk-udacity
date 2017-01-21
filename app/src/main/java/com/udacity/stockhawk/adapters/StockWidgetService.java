@@ -12,6 +12,8 @@ import android.widget.RemoteViewsService;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 
+import java.util.Locale;
+
 /**
  * Created by Justin on 1/3/17.
  */
@@ -79,7 +81,7 @@ public class StockWidgetService extends RemoteViewsService {
                 Log.d(LOG_TAG, "Stock price is " + stockPrice);
 
                 views.setTextViewText(R.id.widget_stock_name_textview, stockName);
-                views.setTextViewText(R.id.widget_stock_price_textview, stockPrice);
+                views.setTextViewText(R.id.widget_stock_price_textview, String.format(Locale.US, "$%.2f", Double.valueOf(stockPrice)));
 
                 final Intent intent = new Intent();
 
