@@ -2,6 +2,7 @@ package com.udacity.stockhawk.adapters;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Binder;
 import android.util.Log;
@@ -81,7 +82,9 @@ public class StockWidgetService extends RemoteViewsService {
                 Log.d(LOG_TAG, "Stock price is " + stockPrice);
 
                 views.setTextViewText(R.id.widget_stock_name_textview, stockName);
+                views.setTextColor(R.id.widget_stock_name_textview, Color.WHITE);
                 views.setTextViewText(R.id.widget_stock_price_textview, String.format(Locale.US, "$%.2f", Double.valueOf(stockPrice)));
+                views.setTextColor(R.id.widget_stock_price_textview, Color.WHITE);
 
                 final Intent intent = new Intent();
 

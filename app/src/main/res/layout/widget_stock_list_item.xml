@@ -10,12 +10,14 @@
         android:id="@+id/widget_stock_name_textview"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"/>
 
     <TextView
         android:id="@+id/widget_stock_price_textview"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"/>
 
 </LinearLayout>
