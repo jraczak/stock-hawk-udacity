@@ -4,6 +4,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -80,6 +83,9 @@ public class StockDetailActivity extends AppCompatActivity {
         StockHistoryAdapter historyAdapter = new StockHistoryAdapter(treeMappedHistory);
         ListView listView = (ListView) findViewById(R.id.stock_history_listview);
         listView.setAdapter(historyAdapter);
+        // Make sure the list view is tall enough to hold all the records
+        setListViewHeightBasedOnItems(listView);
+
 
         List<Entry> graphEntries = new ArrayList<>();
 
@@ -103,9 +109,10 @@ public class StockDetailActivity extends AppCompatActivity {
 
         mLineChart.setDrawGridBackground(false);
         mLineChart.setDrawBorders(false);
-        mLineChart.setTouchEnabled(true);
+        mLineChart.setTouchEnabled(false);
         mLineChart.setData(lineData);
         mLineChart.invalidate();
+        mLineChart.requestFocus();
 
 
     }
@@ -116,6 +123,40 @@ public class StockDetailActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliseconds);
         return simpleDateFormat.format(calendar.getTime());
+    }
+
+    public static boolean setListViewHeightBasedOnItems(ListView listView) {
+
+        ListAdapter listAdapter = listView.getAdapter();
+
+        if (listAdapter != null) {
+            int numberOfItems = listAdapter.getCount();
+            int totalItemsHeight = 0;
+
+            for (int itemPosition = 0; itemPosition < numberOfItems; itemPosition++) {
+                View item = listAdapter.getView(itemPosition, null, listView);
+                item.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                //totalItemsHeight += item.getMeasuredHeight();
+                totalItemsHeight += item.getMeasuredHeight();
+                Log.d(LOG_TAG, "Measured height of list item is " + item.getMeasuredHeight());
+                Log.d(LOG_TAG, "Total height of list view is now " + totalItemsHeight);
+            }
+
+            int totalDividersHeight = listView.getDividerHeight() * (numberOfItems -1 );
+
+            ViewGroup.LayoutParams params =
+                    listView.getLayoutParams();
+            params.height = ((totalItemsHeight + totalDividersHeight)/2 + 700);
+            // TODO: Figure out why this doesn't measure the correct 51dp size
+            //params.height = totalItemsHeight + totalDividersHeight;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

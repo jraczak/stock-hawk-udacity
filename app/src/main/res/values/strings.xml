@@ -36,6 +36,8 @@
     <string name="label_date">Date</string>
     <string name="label_price">Close</string>
 
+    <string name="no_network_message">Your device does not appear to have a data connection. Please try again once your device has connected.</string>
+
     <!-- CONTENT DESCRIPTION STRINGS -->
     <string name="content_description_add_stock">Click to add a new stock</string>
 

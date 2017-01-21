@@ -47,7 +47,7 @@ public final class QuoteSyncJob {
     private QuoteSyncJob() {
     }
 
-    static void getQuotes(Context context) {
+    static void getQuotes(final Context context) {
 
         Timber.d("Running sync job");
         // Get around nonsense about final variables...
@@ -78,7 +78,7 @@ public final class QuoteSyncJob {
             ArrayList<ContentValues> quoteCVs = new ArrayList<>();
 
             while (iterator.hasNext()) {
-                String symbol = iterator.next();
+                final String symbol = iterator.next();
                 Handler handler = new Handler(Looper.getMainLooper());
 
 
@@ -126,6 +126,9 @@ public final class QuoteSyncJob {
                         @Override
                         public void run() {
                             Toast.makeText(context2, "Stock matching the provided symbol could not be found. Please check the symbol and try again.", Toast.LENGTH_LONG).show();
+                            // If we find out this stock doesn't exist in the remote service, remove
+                            // it from the stored list so we don't complain about it repeatedly.
+                            PrefUtils.removeStock(context, symbol);
                         }
                     });
                 }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,12 +46,12 @@ public class StockHistoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final View view;
+        final LinearLayout view;
 
         if (convertView == null) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.stock_history_item, parent, false);
+            view = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.stock_history_item, parent, false);
         } else {
-            view = convertView;
+            view = (LinearLayout) convertView;
         }
 
         TextView dateTextView = (TextView) view.findViewById(R.id.stock_history_date_textview);
